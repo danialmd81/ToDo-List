@@ -9,9 +9,9 @@
     "dist": "electron-builder"
   },
   "keywords": [],
-  "author": "",
+  "author": "danialmd81",
   "license": "ISC",
-  "description": "",
+  "description": "To Do List App",
   "devDependencies": {
     "electron": "^31.1.0",
     "electron-builder": "^24.13.3"
@@ -19,6 +19,7 @@
   "build": {
     "appId": "danialmd81.todo-list",
     "productName": "ToDo List",
+    "icon": "/assets/ToDo List.png",
     "directories": {
       "output": "dist"
     },
