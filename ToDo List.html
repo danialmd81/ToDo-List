@@ -178,8 +178,8 @@
         });
 
         // Handle checkbox changes for strikethrough effect
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
+        const strikethrough = document.querySelectorAll('input[type="checkbox"]');
+        strikethrough.forEach(checkbox => {
             checkbox.addEventListener('change', function () {
                 if (this.checked) {
                     this.parentElement.classList.add('strikethrough');

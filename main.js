@@ -1,34 +1,11 @@
 const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
-// Dynamically import electron-store
-let store;
-
-(async () => {
-    const Store = (await import('electron-store')).default;
-    store = new Store();
-
-    // It's important to create the window inside this async function
-    // or after the store has been initialized
-    app.whenReady().then(createWindow);
-})();
 
 function createWindow() {
-    // Ensure store is initialized before accessing it
-    if (!store) {
-        console.error('Store not initialized');
-        return;
-    }
-
-    // First, get the saved window size and position.
-    let { width, height, x, y } = store.get('windowBounds', { width: 1280, height: 720 });
-
     const mainWindow = new BrowserWindow({
-        x,
-        y,
-        width,
-        height,
-        webPreferences: {
-            nodeIntegration: false,
+        width: 1280,
+        height: 720, webPreferences: {
+            nodeIntegration: true,
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         },
