@@ -168,24 +168,35 @@
 </html>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Handle link clicks to open paths
-        document.querySelectorAll('a[data-path]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default navigation
-                const path = link.getAttribute('data-path').replace('file://', ''); // Remove the file:// protocol
-                window.electron.openPath(path); // Use the exposed function to open the file explorer
-            });
-        });
+        // Load saved checked states
+        const savedStates = JSON.parse(localStorage.getItem('checkedStates') || '{}');
 
-        // Handle checkbox changes for strikethrough effect
         const strikethrough = document.querySelectorAll('input[type="checkbox"]');
         strikethrough.forEach(checkbox => {
+            const itemId = checkbox.id;
+            // Apply saved state
+            if (savedStates[itemId]) {
+                checkbox.checked = true;
+                checkbox.parentElement.classList.add('strikethrough');
+            }
+
             checkbox.addEventListener('change', function () {
                 if (this.checked) {
                     this.parentElement.classList.add('strikethrough');
                 } else {
                     this.parentElement.classList.remove('strikethrough');
                 }
+                // Save the checked state
+                savedStates[this.id] = this.checked;
+                localStorage.setItem('checkedStates', JSON.stringify(savedStates));
+            });
+        });
+        // Handle link clicks to open paths
+        document.querySelectorAll('a[data-path]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default navigation
+                const path = link.getAttribute('data-path').replace('file://', ''); // Remove the file:// protocol
+                window.electron.openPath(path); // Use the exposed function to open the file explorer
             });
         });
     });
