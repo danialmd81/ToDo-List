@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="file://en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            /* Dark background */
+            color: #e0e0e0;
+            /* Light text */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #bb86fc;
+            /* Purple text for headings */
+        }
+
+        ol {
+            list-style-type: decimal;
+            padding: 0;
+            margin-left: 20px;
+            /* Add some left margin for indentation */
+            color: #ff4081;
+            /* Pink text for ordered list */
+        }
+
+        li {
+            background-color: #333333;
+            /* Darker element backgrounds */
+            border: 1px solid #444;
+            /* Slightly lighter border for contrast */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            /* Adjusted shadow for dark theme */
+        }
+
+        a {
+            color: #8ab4f8;
+            /* Light blue links */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .strikethrough a {
+            text-decoration: line-through;
+            color: #40ff46;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ToDo List</h1>
+    <ol>
+        <li>
+            <input type="checkbox" id="item1">
+            <label for="item1">
+                <a href="#"
+                    data-path="file://E:\Projects\Go\1_Go\Udemy - Full Stack Go Programming (Golang) from Beginner to Advance 2021-10">
+                    Udemy - Full Stack Go Programming (Golang) from
+                    Beginner
+                    to
+                    Advance 2021-10
+                </a>
+            </label>
+        </li>
+        <li>
+            <input type="checkbox" id="item2">
+            <label for="item2">
+                <a href="#"
+                    data-path="file://E:\Projects\Data Structures And Algorithms\1_Data Structures And Algorithms\Udemy - Mastering critical SKILLS in Algorithms using C++ Part 1 2022-3">
+                    Udemy - Mastering critical SKILLS in Algorithms
+                    using
+                    C++
+                    Part 1 2022-3
+                </a>
+        </li>
+        <li>
+            <input type="checkbox" id="item3">
+            <label for="item3">
+                <a href="#" data-path="file://E:\1_University\1_Transfered\1_English">
+                    1_English
+                </a>
+        </li>
+        <li>
+            <input type="checkbox" id="item4">
+            <label for="item4">
+                <a href="#" data-path="file://E:\1_University\1_Transfered\1_Germanny">
+                    1_Germanny
+                </a>
+        </li>
+        <li>
+            <input type="checkbox" id="item5">
+            <label for="item5">
+                <a href="#"
+                    data-path="file://E:\1_University\1_Transfered\Datacamp - Working with the OpenAI API 2023-11">
+                    Datacamp - Working with the OpenAI
+                    API 2023-11
+                </a>
+        </li>
+        <li>
+            <input type="checkbox" id="item6">
+            <label for="item6">
+                <a href="#"
+                    data-path="file://E:\1_University\1_Transfered\Udemy Docker For The Absolute Beginner Hands On DevOps 2022-3">
+                    Udemy Docker For The Absolute
+                    Beginner Hands On DevOps
+                    2022-3
+                </a>
+        </li>
+        <li>
+            <input type="checkbox" id="item7">
+            <label for="item7">
+                <a href="#"
+                    data-path="file://E:\Projects\SQL\1_SQL\Udemy - Project  Implement SQL-RDBMS from Scratch in CC++ 2024-1">
+                    Udemy - Project Implement
+                    SQL-RDBMS from Scratch in
+                    CC++
+                    2024-1
+                </a>
+        </li>
+        <li>
+            <input type="checkbox" id="item8">
+            <label for="item8">
+                <a href="#"
+                    data-path="file://E:\1_University\1_Transfered\Udemy - Microsoft Excel - Excel from Beginner to Advanced">
+                    Udemy - Microsoft Excel
+                    - Excel from Beginner to
+                    Advanced
+                </a>
+        </li>
+        <li>
+            <input type="checkbox" id="item9">
+            <label for="item9">
+                <a href="#"
+                    data-path="file://E:\Projects\Python\1_Python\Udemy - Django master course with real world practical project 2022 2022-4">
+                    Udemy - Django
+                    master course with
+                    real world practical
+                    project 2022 2022-4
+                </a>
+        </li>
+        <li>
+            <input type="checkbox" id="item10">
+            <label for="item10">
+                <a href="#"
+                    data-path="file://E:\1_University\1_Transfered\Udemy - ChatGPT Masterclass for Programmers and Software Engineers 2023-6">
+                    Udemy - ChatGPT
+                    Masterclass for
+                    Programmers and
+                    Software
+                    Engineers 2023-6
+                </a>
+        </li>
+    </ol>
+</body>
+
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Handle link clicks to open paths
+        document.querySelectorAll('a[data-path]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default navigation
+                const path = link.getAttribute('data-path').replace('file://', ''); // Remove the file:// protocol
+                window.electron.openPath(path); // Use the exposed function to open the file explorer
+            });
+        });
+
+        // Handle checkbox changes for strikethrough effect
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    this.parentElement.classList.add('strikethrough');
+                } else {
+                    this.parentElement.classList.remove('strikethrough');
+                }
+            });
+        });
+    });
+</script>
